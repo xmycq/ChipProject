@@ -1,0 +1,3 @@
+[submodule "xs-utils"]
+	path = xs-utils
+	url = https://github.com/Siudya/xs-utils.git
