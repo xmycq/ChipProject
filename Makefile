@@ -28,7 +28,7 @@ print_verilog:
 	@echo
 
 idea:
-	mill mill.scalalib.GenIdea/idea
+	mill -i mill.idea.GenIdea/idea
 
 amend_commit:
 	@git add .
