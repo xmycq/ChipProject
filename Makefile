@@ -12,12 +12,20 @@ PACKAGE = cpu
 
 default: rtl
 
+init:
+	git submodule update --init
+	cd rocket-chip && git submodule update --init hardfloat cde
+
+compile:
+	mill -i ChipProject.compile
+	mill -i ChipProject.test.compile
+
 rtl:
 	@echo mod is $(mod)
 	mill -j 16 $(mill_mod).runMain ${PACKAGE}.$(mod)GenRTL -dt $(BUILD_DIR) --output-file ${mod}.v
 
-tests:
-	mill -j 16 ${mill_mod}.test.testOnly ${PACKAGE}.${mod}Test
+test:
+	mill -i ChipProject.test.runMain xCache.RegFileTest -td build
 
 raw_test:
 	mill -j 16 $(mill_mod).runMain ${PACKAGE}.$(mod)RawTest -dt $(BUILD_DIR) --output-file ${mod}.v
